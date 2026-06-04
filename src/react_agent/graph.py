@@ -40,7 +40,10 @@ async def call_model(
 
     # Format the system prompt. Customize this to change the agent's behavior.
     system_message = configuration.system_prompt.format(
-        system_time=datetime.now(tz=timezone.utc).isoformat()
+        system_time=datetime.now(tz=timezone.utc).isoformat(),
+        min_profit_multiplier=configuration.min_profit_multiplier,
+        max_buy_price=configuration.max_buy_price,
+        ebay_min_sold_count=configuration.ebay_min_sold_count,
     )
 
     # Get the model's response
@@ -120,4 +123,4 @@ graph = builder.compile(
     interrupt_before=[],  # Add node names here to update state before they're called
     interrupt_after=[],  # Add node names here to update state after they're called
 )
-graph.name = "ReAct Agent"  # This customizes the name in LangSmith
+graph.name = "Marketplace Arbitrage Agent"  # This customizes the name in LangSmith
