@@ -235,7 +235,7 @@ async def check_ebay_sold_prices(
             response.raise_for_status()
             html = response.text
 
-        soup = BeautifulSoup(html, "html.parser")
+        soup = BeautifulSoup(html, "lxml")
 
         price_pattern = re.compile(r"\$([\d,]+(?:\.\d{2})?)")
         prices: list[float] = []
