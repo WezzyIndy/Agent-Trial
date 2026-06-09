@@ -20,6 +20,40 @@ function adminUnlockRound2() {
 }
 
 // =====================================================
+// OFFICIAL GROUP STAGE RESULTS
+//
+// Leave as null until the Group Stage is complete.
+// When it's done, tell Claude the actual standings and
+// this gets updated + pushed. Netlify redeploys in ~30s
+// and everyone's bracket seeds from the real teams.
+//
+// Groups A–H need a `wild` (the 3rd-place team that fills
+// the wildcard bracket slot). Groups I–L do not.
+//
+// Template — uncomment and fill in when ready:
+//
+// const OFFICIAL_RESULTS = {
+//   A: {
+//     first:  { flag:'🇺🇸', name:'United States', conf:'CONCACAF' },
+//     second: { flag:'🇺🇾', name:'Uruguay',        conf:'CONMEBOL' },
+//     wild:   { flag:'🇵🇦', name:'Panama',         conf:'CONCACAF' },
+//   },
+//   B: { first: {...}, second: {...}, wild: {...} },
+//   C: { first: {...}, second: {...}, wild: {...} },
+//   D: { first: {...}, second: {...}, wild: {...} },
+//   E: { first: {...}, second: {...}, wild: {...} },
+//   F: { first: {...}, second: {...}, wild: {...} },
+//   G: { first: {...}, second: {...}, wild: {...} },
+//   H: { first: {...}, second: {...}, wild: {...} },
+//   I: { first: {...}, second: {...} },
+//   J: { first: {...}, second: {...} },
+//   K: { first: {...}, second: {...} },
+//   L: { first: {...}, second: {...} },
+// };
+// =====================================================
+const OFFICIAL_RESULTS = null;
+
+// =====================================================
 // DATA
 // =====================================================
 
@@ -225,6 +259,17 @@ function deletePicker(name) {
 
 function getTeamForSource(src) {
   const [group, placement] = src.split('.');
+
+  // Official results take priority when available (Round 2 is live)
+  if (OFFICIAL_RESULTS?.[group]) {
+    const g = OFFICIAL_RESULTS[group];
+    if (placement === 'first')  return g.first  || null;
+    if (placement === 'second') return g.second || null;
+    if (placement === 'wild')   return g.wild ? { ...g.wild, isWild: true } : null;
+    return null;
+  }
+
+  // Fall back to the user's own Round 1 predictions
   if (placement === 'first')  return state.groupPicks[group]?.first  || null;
   if (placement === 'second') return state.groupPicks[group]?.second || null;
   if (placement === 'wild')   return getWildcard(group);
@@ -538,7 +583,7 @@ function renderRound1Complete() {
         <div class="r2-box-icon">🔒</div>
         <div class="r2-box-content">
           <strong>Round 2 opens after the Group Stage</strong>
-          <span>Come back on or after <em>${ROUND2_UNLOCK_DATE.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</em> to fill in your bracket.</span>
+          <span>Come back on or after <em>${ROUND2_UNLOCK_DATE.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</em>. The bracket will be seeded from the actual tournament results.</span>
           <span class="r2-countdown">${days > 0 ? `~${days} day${days !== 1 ? 's' : ''} to go` : 'Opening soon!'}</span>
         </div>
       </div>
@@ -606,6 +651,10 @@ function renderBracketRound(round) {
   updateBracketProgress(round);
   updateBracketTabStates();
   updateChampionBanner();
+
+  // Show badge when bracket is seeded from official results
+  const badge = document.getElementById('officialResultsBadge');
+  if (badge) badge.classList.toggle('hidden', !OFFICIAL_RESULTS);
 }
 
 function renderMatchTeamRow(team, isWinner, isLoser, isTBD, round, matchIdx, side) {

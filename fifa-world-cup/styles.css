@@ -195,6 +195,20 @@ ul { list-style: none; }
 .progress-bar-fill.gold { background: linear-gradient(90deg, var(--gold-dark), var(--gold)); }
 .progress-label { font-size: 12px; font-weight: 600; color: var(--gray); }
 
+.official-badge {
+  display: inline-block;
+  background: rgba(16,185,129,.1);
+  border: 1px solid rgba(16,185,129,.35);
+  color: #0d9468;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  padding: 6px 16px;
+  border-radius: 999px;
+  margin-top: 4px;
+}
+.official-badge.hidden { display: none; }
+
 .bracket-progress-wrap { max-width: 400px; margin: 0 auto 32px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .bracket-progress-wrap .progress-bar-fill { width: 100%; height: 6px; background: var(--border); border-radius: 999px; overflow: hidden; }
 .bracket-progress-wrap .progress-bar-fill { /* override to act as container */ background: var(--border) !important; }
