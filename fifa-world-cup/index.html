@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FIFA World Cup 2026 | USA · Canada · Mexico</title>
+  <title>FIFA World Cup 2026 Bracket Challenge</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,14 +16,13 @@
     <div class="nav-inner">
       <a href="#" class="nav-logo">
         <span class="trophy">&#9917;</span>
-        <span class="nav-logo-text">FIFA World Cup <strong>2026</strong></span>
+        <span class="nav-logo-text">WC <strong>2026</strong> Bracket</span>
       </a>
       <ul class="nav-links">
+        <li><a href="#picks">My Picks</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="#groups">Groups</a></li>
-        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#groups-info">Groups</a></li>
         <li><a href="#venues">Venues</a></li>
-        <li><a href="#hosts">Host Nations</a></li>
       </ul>
       <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -36,72 +35,158 @@
     <div class="hero-bg"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <p class="hero-eyebrow">The World's Greatest Sporting Event</p>
-      <h1 class="hero-title">FIFA<br/>World Cup<br/><span class="hero-year">2026</span></h1>
-      <p class="hero-subtitle">USA &bull; Canada &bull; Mexico &bull; 48 Teams &bull; 104 Matches</p>
+      <p class="hero-eyebrow">FIFA World Cup 2026 · USA · Canada · Mexico</p>
+      <h1 class="hero-title">Bracket<br/><span class="hero-year">Challenge</span></h1>
+      <p class="hero-subtitle">Pick your group winners. Fill your bracket. Crown your champion.</p>
       <div class="hero-dates">
-        <span>June 11 &mdash; July 19, 2026</span>
+        <span>June 11 &mdash; July 19, 2026 &nbsp;&bull;&nbsp; 48 Teams &nbsp;&bull;&nbsp; 104 Matches</span>
+      </div>
+      <div class="hero-ctas">
+        <a href="#picks" class="btn btn-primary">Make Your Picks &#8594;</a>
+        <a href="#about" class="btn btn-ghost">Learn More</a>
       </div>
 
-      <!-- COUNTDOWN -->
       <div class="countdown" id="countdown">
-        <div class="countdown-block">
-          <span class="countdown-num" id="cd-days">00</span>
-          <span class="countdown-label">Days</span>
-        </div>
+        <div class="countdown-block"><span class="countdown-num" id="cd-days">00</span><span class="countdown-label">Days</span></div>
         <div class="countdown-sep">:</div>
-        <div class="countdown-block">
-          <span class="countdown-num" id="cd-hours">00</span>
-          <span class="countdown-label">Hours</span>
-        </div>
+        <div class="countdown-block"><span class="countdown-num" id="cd-hours">00</span><span class="countdown-label">Hours</span></div>
         <div class="countdown-sep">:</div>
-        <div class="countdown-block">
-          <span class="countdown-num" id="cd-mins">00</span>
-          <span class="countdown-label">Minutes</span>
-        </div>
+        <div class="countdown-block"><span class="countdown-num" id="cd-mins">00</span><span class="countdown-label">Mins</span></div>
         <div class="countdown-sep">:</div>
-        <div class="countdown-block">
-          <span class="countdown-num" id="cd-secs">00</span>
-          <span class="countdown-label">Seconds</span>
+        <div class="countdown-block"><span class="countdown-num" id="cd-secs">00</span><span class="countdown-label">Secs</span></div>
+      </div>
+    </div>
+    <div class="hero-scroll-hint"><span>Scroll</span><div class="scroll-arrow"></div></div>
+  </section>
+
+  <!-- PICKS GAME -->
+  <section id="picks" class="picks-section">
+    <div class="container">
+
+      <!-- TOAST NOTIFICATION -->
+      <div id="toast" class="toast hidden"></div>
+
+      <!-- ── SCREEN: WELCOME ── -->
+      <div id="screen-welcome" class="pick-screen active">
+        <div class="welcome-inner">
+          <div class="welcome-badge">&#9917; Bracket Challenge</div>
+          <h2 class="welcome-title">Make Your 2026 Picks</h2>
+          <p class="welcome-desc">
+            Two rounds. Pick the top two teams from each group, then fill your bracket all the way to the World Cup champion.
+          </p>
+
+          <div class="how-it-works">
+            <div class="hiw-step">
+              <div class="hiw-num">1</div>
+              <div class="hiw-text">
+                <strong>Group Stage</strong>
+                <span>Pick 1st &amp; 2nd from all 12 groups</span>
+              </div>
+            </div>
+            <div class="hiw-arrow">&#8594;</div>
+            <div class="hiw-step">
+              <div class="hiw-num">2</div>
+              <div class="hiw-text">
+                <strong>Tournament Bracket</strong>
+                <span>Pick match winners through to the Final</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="name-form">
+            <input type="text" id="nameInput" placeholder="Enter your name to start..." maxlength="30" autocomplete="off" />
+            <button id="startBtn" class="btn btn-primary">Start Picks &#8594;</button>
+          </div>
+
+          <div id="savedUsers" class="saved-users"></div>
         </div>
       </div>
 
-      <a href="#groups" class="btn btn-primary">Explore the Tournament</a>
-    </div>
+      <!-- ── SCREEN: STEP 1 — GROUP PICKS ── -->
+      <div id="screen-groups" class="pick-screen">
+        <div class="picks-header">
+          <div class="step-track">
+            <div class="step-node active" id="stepNode1"><span>1</span><label>Group Picks</label></div>
+            <div class="step-line"></div>
+            <div class="step-node" id="stepNode2"><span>2</span><label>Bracket</label></div>
+          </div>
+          <h2>Pick Group Winners</h2>
+          <p>Click teams to assign 1st and 2nd place finishers. Click a selected team to remove them.</p>
+          <div class="progress-wrap">
+            <div id="groupProgressBar" class="progress-bar-fill"></div>
+          </div>
+          <p id="groupProgressLabel" class="progress-label">0 / 12 groups complete</p>
+        </div>
 
-    <div class="hero-scroll-hint">
-      <span>Scroll</span>
-      <div class="scroll-arrow"></div>
+        <div id="groupsPickGrid" class="groups-pick-grid">
+          <!-- 12 group cards rendered by JS -->
+        </div>
+
+        <div class="picks-actions">
+          <button id="backToWelcomeBtn" class="btn btn-ghost">&#8592; Change Name</button>
+          <button id="toBracketBtn" class="btn btn-primary" disabled>Build My Bracket &#8594;</button>
+        </div>
+      </div>
+
+      <!-- ── SCREEN: STEP 2 — BRACKET ── -->
+      <div id="screen-bracket" class="pick-screen">
+        <div class="picks-header">
+          <div class="step-track">
+            <div class="step-node done" id="bracketStepNode1"><span>&#10003;</span><label>Group Picks</label></div>
+            <div class="step-line done"></div>
+            <div class="step-node active" id="bracketStepNode2"><span>2</span><label>Bracket</label></div>
+          </div>
+          <h2>Fill Your Bracket</h2>
+          <p>Click a team to pick them as the match winner. Picks cascade forward automatically.</p>
+        </div>
+
+        <div class="bracket-round-tabs" id="bracketRoundTabs">
+          <button class="bracket-tab active" data-round="r32">Round of 32</button>
+          <button class="bracket-tab" data-round="r16">Round of 16</button>
+          <button class="bracket-tab" data-round="qf">Quarterfinals</button>
+          <button class="bracket-tab" data-round="sf">Semifinals</button>
+          <button class="bracket-tab" data-round="final">&#127942; Final</button>
+        </div>
+
+        <div class="bracket-progress-wrap">
+          <div id="bracketProgressBar" class="progress-bar-fill gold"></div>
+          <span id="bracketProgressLabel" class="progress-label"></span>
+        </div>
+
+        <div id="bracketMatchGrid" class="bracket-match-grid">
+          <!-- Populated by JS -->
+        </div>
+
+        <div id="championBanner" class="champion-banner hidden"></div>
+
+        <div class="picks-actions">
+          <button id="backToGroupsBtn" class="btn btn-ghost">&#8592; Edit Groups</button>
+          <button id="viewSummaryBtn" class="btn btn-primary">View My Summary &#8594;</button>
+        </div>
+      </div>
+
+      <!-- ── SCREEN: SUMMARY ── -->
+      <div id="screen-summary" class="pick-screen">
+        <div id="summaryContent" class="summary-content"></div>
+        <div class="picks-actions">
+          <button id="editPicksBtn" class="btn btn-ghost">&#8592; Edit My Picks</button>
+          <button id="newPickerBtn" class="btn btn-primary">New Picker &#8594;</button>
+        </div>
+      </div>
+
     </div>
   </section>
 
   <!-- STATS BANNER -->
   <section class="stats-banner">
     <div class="stats-inner">
-      <div class="stat">
-        <span class="stat-num">48</span>
-        <span class="stat-desc">Nations Competing</span>
-      </div>
+      <div class="stat"><span class="stat-num">48</span><span class="stat-desc">Competing Nations</span></div>
       <div class="stat-divider"></div>
-      <div class="stat">
-        <span class="stat-num">104</span>
-        <span class="stat-desc">Total Matches</span>
-      </div>
+      <div class="stat"><span class="stat-num">104</span><span class="stat-desc">Total Matches</span></div>
       <div class="stat-divider"></div>
-      <div class="stat">
-        <span class="stat-num">16</span>
-        <span class="stat-desc">Host Stadiums</span>
-      </div>
+      <div class="stat"><span class="stat-num">16</span><span class="stat-desc">Host Stadiums</span></div>
       <div class="stat-divider"></div>
-      <div class="stat">
-        <span class="stat-num">3</span>
-        <span class="stat-desc">Host Countries</span>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat">
-        <span class="stat-num">5B+</span>
-        <span class="stat-desc">Global Viewers</span>
-      </div>
+      <div class="stat"><span class="stat-num">3</span><span class="stat-desc">Host Countries</span></div>
     </div>
   </section>
 
@@ -114,47 +199,28 @@
       </div>
       <div class="about-grid">
         <div class="about-text">
-          <p>The 2026 FIFA World Cup marks a landmark moment in football history. For the first time ever, <strong>48 national teams</strong> will compete across three host nations — the United States, Canada, and Mexico — making it the largest World Cup in the tournament's storied history.</p>
+          <p>The 2026 FIFA World Cup marks a landmark moment in football history. For the first time ever, <strong>48 national teams</strong> will compete across three host nations — the United States, Canada, and Mexico — making it the largest World Cup in history.</p>
           <p>Spanning 39 days from June 11 to July 19, the expanded format introduces 12 groups of four teams each, with the top two from each group plus eight best third-placed sides advancing to a 32-team knockout round.</p>
-          <p>With matches scheduled across iconic stadiums from Los Angeles to Toronto, this World Cup promises to be an unforgettable celebration of the beautiful game.</p>
-          <a href="#schedule" class="btn btn-outline">View Schedule</a>
+          <a href="#picks" class="btn btn-outline">Make Your Picks</a>
         </div>
         <div class="about-cards">
-          <div class="info-card">
-            <div class="info-card-icon">&#128197;</div>
-            <h3>Tournament Dates</h3>
-            <p>June 11 – July 19, 2026</p>
-          </div>
-          <div class="info-card">
-            <div class="info-card-icon">&#127942;</div>
-            <h3>Format</h3>
-            <p>12 Groups → Round of 32 → Knockout Rounds → Final</p>
-          </div>
-          <div class="info-card">
-            <div class="info-card-icon">&#127760;</div>
-            <h3>Host Nations</h3>
-            <p>United States · Canada · Mexico</p>
-          </div>
-          <div class="info-card">
-            <div class="info-card-icon">&#127942;</div>
-            <h3>Defending Champion</h3>
-            <p>Argentina (2022 Qatar)</p>
-          </div>
+          <div class="info-card"><div class="info-card-icon">&#128197;</div><h3>Tournament Dates</h3><p>June 11 – July 19, 2026</p></div>
+          <div class="info-card"><div class="info-card-icon">&#127942;</div><h3>Format</h3><p>12 Groups → Round of 32 → Final</p></div>
+          <div class="info-card"><div class="info-card-icon">&#127760;</div><h3>Host Nations</h3><p>United States · Canada · Mexico</p></div>
+          <div class="info-card"><div class="info-card-icon">&#129351;</div><h3>Defending Champion</h3><p>Argentina (2022 Qatar)</p></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- GROUPS -->
-  <section class="groups-section section" id="groups">
+  <!-- GROUPS INFO (read-only viewer) -->
+  <section class="groups-section section" id="groups-info">
     <div class="container">
       <div class="section-header">
         <p class="section-eyebrow">Group Stage</p>
         <h2 class="section-title">The 12 Groups</h2>
         <p class="section-desc">48 nations. 12 groups. Every match matters.</p>
       </div>
-
-      <!-- Group Filter Tabs -->
       <div class="group-tabs" id="groupTabs">
         <button class="group-tab active" data-group="A">A</button>
         <button class="group-tab" data-group="B">B</button>
@@ -169,35 +235,7 @@
         <button class="group-tab" data-group="K">K</button>
         <button class="group-tab" data-group="L">L</button>
       </div>
-
-      <div class="group-display" id="groupDisplay">
-        <!-- Rendered by JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- SCHEDULE -->
-  <section class="schedule-section section" id="schedule">
-    <div class="container">
-      <div class="section-header">
-        <p class="section-eyebrow">Match Schedule</p>
-        <h2 class="section-title">Key Fixtures</h2>
-        <p class="section-desc">From the Opening Match to the Grand Final</p>
-      </div>
-
-      <div class="schedule-filter">
-        <button class="filter-btn active" data-round="all">All Rounds</button>
-        <button class="filter-btn" data-round="group">Group Stage</button>
-        <button class="filter-btn" data-round="r32">Round of 32</button>
-        <button class="filter-btn" data-round="r16">Round of 16</button>
-        <button class="filter-btn" data-round="qf">Quarterfinals</button>
-        <button class="filter-btn" data-round="sf">Semifinals</button>
-        <button class="filter-btn" data-round="final">Final</button>
-      </div>
-
-      <div class="schedule-grid" id="scheduleGrid">
-        <!-- Rendered by JS -->
-      </div>
+      <div class="group-display" id="groupDisplay"></div>
     </div>
   </section>
 
@@ -209,10 +247,7 @@
         <h2 class="section-title">World-Class Venues</h2>
         <p class="section-desc">16 iconic stadiums across three nations</p>
       </div>
-
-      <div class="venues-grid" id="venuesGrid">
-        <!-- Rendered by JS -->
-      </div>
+      <div class="venues-grid" id="venuesGrid"></div>
     </div>
   </section>
 
@@ -224,45 +259,26 @@
         <h2 class="section-title">Three Countries, One Dream</h2>
       </div>
       <div class="hosts-grid">
-        <div class="host-card" style="--accent: #B22234;">
+        <div class="host-card" style="--accent:#B22234;">
           <div class="host-flag">&#127482;&#127480;</div>
           <h3>United States</h3>
-          <p class="host-matches">78 Matches</p>
-          <p>Home to 11 host venues including MetLife Stadium, SoFi Stadium, and AT&amp;T Stadium — hosting the tournament Final at MetLife in East Rutherford, NJ.</p>
-          <ul class="host-cities">
-            <li>New York / New Jersey</li>
-            <li>Los Angeles</li>
-            <li>Dallas</li>
-            <li>San Francisco Bay Area</li>
-            <li>Miami</li>
-            <li>Atlanta</li>
-            <li>Seattle</li>
-            <li>Boston</li>
-            <li>Houston</li>
-            <li>Philadelphia</li>
-            <li>Kansas City</li>
-          </ul>
+          <p class="host-matches">78 Matches · 11 Venues</p>
+          <p>Hosting the Grand Final at MetLife Stadium, East Rutherford, NJ.</p>
+          <ul class="host-cities"><li>New York/NJ</li><li>Los Angeles</li><li>Dallas</li><li>Miami</li><li>Atlanta</li><li>Seattle</li><li>San Francisco</li><li>Boston</li><li>Houston</li><li>Philadelphia</li><li>Kansas City</li></ul>
         </div>
-        <div class="host-card" style="--accent: #FF0000;">
+        <div class="host-card" style="--accent:#FF0000;">
           <div class="host-flag">&#127464;&#127462;</div>
           <h3>Canada</h3>
-          <p class="host-matches">13 Matches</p>
-          <p>Canada's first-ever World Cup as host nation, with matches split between Toronto and Vancouver — two of the most cosmopolitan cities in North America.</p>
-          <ul class="host-cities">
-            <li>Toronto</li>
-            <li>Vancouver</li>
-          </ul>
+          <p class="host-matches">13 Matches · 2 Venues</p>
+          <p>Canada's first-ever World Cup as a host nation.</p>
+          <ul class="host-cities"><li>Toronto</li><li>Vancouver</li></ul>
         </div>
-        <div class="host-card" style="--accent: #006847;">
+        <div class="host-card" style="--accent:#006847;">
           <div class="host-flag">&#127474;&#127485;</div>
           <h3>Mexico</h3>
-          <p class="host-matches">13 Matches</p>
-          <p>Mexico becomes the first nation to host World Cup matches three times — joining 1970 and 1986 — with matches in Mexico City, Guadalajara, and Monterrey.</p>
-          <ul class="host-cities">
-            <li>Mexico City</li>
-            <li>Guadalajara</li>
-            <li>Monterrey</li>
-          </ul>
+          <p class="host-matches">13 Matches · 3 Venues</p>
+          <p>Mexico's historic third time hosting the World Cup.</p>
+          <ul class="host-cities"><li>Mexico City</li><li>Guadalajara</li><li>Monterrey</li></ul>
         </div>
       </div>
     </div>
@@ -273,19 +289,16 @@
     <div class="footer-inner">
       <div class="footer-brand">
         <span class="trophy large">&#9917;</span>
-        <div>
-          <p class="footer-title">FIFA World Cup 2026</p>
-          <p class="footer-sub">USA &bull; Canada &bull; Mexico</p>
-        </div>
+        <div><p class="footer-title">FIFA World Cup 2026</p><p class="footer-sub">USA &bull; Canada &bull; Mexico</p></div>
       </div>
       <div class="footer-links">
+        <a href="#picks">Picks</a>
         <a href="#about">About</a>
-        <a href="#groups">Groups</a>
-        <a href="#schedule">Schedule</a>
+        <a href="#groups-info">Groups</a>
         <a href="#venues">Venues</a>
         <a href="#hosts">Hosts</a>
       </div>
-      <p class="footer-copy">&copy; 2026 FIFA World Cup Fan Site. All rights reserved.</p>
+      <p class="footer-copy">&copy; 2026 FIFA World Cup Bracket Challenge. Fan site.</p>
     </div>
   </footer>
 
