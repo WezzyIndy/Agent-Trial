@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FIFA World Cup 2026 | USA · Canada · Mexico</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <span class="trophy">&#9917;</span>
+        <span class="nav-logo-text">FIFA World Cup <strong>2026</strong></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#groups">Groups</a></li>
+        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#venues">Venues</a></li>
+        <li><a href="#hosts">Host Nations</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">The World's Greatest Sporting Event</p>
+      <h1 class="hero-title">FIFA<br/>World Cup<br/><span class="hero-year">2026</span></h1>
+      <p class="hero-subtitle">USA &bull; Canada &bull; Mexico &bull; 48 Teams &bull; 104 Matches</p>
+      <div class="hero-dates">
+        <span>June 11 &mdash; July 19, 2026</span>
+      </div>
+
+      <!-- COUNTDOWN -->
+      <div class="countdown" id="countdown">
+        <div class="countdown-block">
+          <span class="countdown-num" id="cd-days">00</span>
+          <span class="countdown-label">Days</span>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-block">
+          <span class="countdown-num" id="cd-hours">00</span>
+          <span class="countdown-label">Hours</span>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-block">
+          <span class="countdown-num" id="cd-mins">00</span>
+          <span class="countdown-label">Minutes</span>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-block">
+          <span class="countdown-num" id="cd-secs">00</span>
+          <span class="countdown-label">Seconds</span>
+        </div>
+      </div>
+
+      <a href="#groups" class="btn btn-primary">Explore the Tournament</a>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- STATS BANNER -->
+  <section class="stats-banner">
+    <div class="stats-inner">
+      <div class="stat">
+        <span class="stat-num">48</span>
+        <span class="stat-desc">Nations Competing</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">104</span>
+        <span class="stat-desc">Total Matches</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">16</span>
+        <span class="stat-desc">Host Stadiums</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">3</span>
+        <span class="stat-desc">Host Countries</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">5B+</span>
+        <span class="stat-desc">Global Viewers</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about section" id="about">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">The Tournament</p>
+        <h2 class="section-title">A Historic Edition</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>The 2026 FIFA World Cup marks a landmark moment in football history. For the first time ever, <strong>48 national teams</strong> will compete across three host nations — the United States, Canada, and Mexico — making it the largest World Cup in the tournament's storied history.</p>
+          <p>Spanning 39 days from June 11 to July 19, the expanded format introduces 12 groups of four teams each, with the top two from each group plus eight best third-placed sides advancing to a 32-team knockout round.</p>
+          <p>With matches scheduled across iconic stadiums from Los Angeles to Toronto, this World Cup promises to be an unforgettable celebration of the beautiful game.</p>
+          <a href="#schedule" class="btn btn-outline">View Schedule</a>
+        </div>
+        <div class="about-cards">
+          <div class="info-card">
+            <div class="info-card-icon">&#128197;</div>
+            <h3>Tournament Dates</h3>
+            <p>June 11 – July 19, 2026</p>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon">&#127942;</div>
+            <h3>Format</h3>
+            <p>12 Groups → Round of 32 → Knockout Rounds → Final</p>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon">&#127760;</div>
+            <h3>Host Nations</h3>
+            <p>United States · Canada · Mexico</p>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon">&#127942;</div>
+            <h3>Defending Champion</h3>
+            <p>Argentina (2022 Qatar)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GROUPS -->
+  <section class="groups-section section" id="groups">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Group Stage</p>
+        <h2 class="section-title">The 12 Groups</h2>
+        <p class="section-desc">48 nations. 12 groups. Every match matters.</p>
+      </div>
+
+      <!-- Group Filter Tabs -->
+      <div class="group-tabs" id="groupTabs">
+        <button class="group-tab active" data-group="A">A</button>
+        <button class="group-tab" data-group="B">B</button>
+        <button class="group-tab" data-group="C">C</button>
+        <button class="group-tab" data-group="D">D</button>
+        <button class="group-tab" data-group="E">E</button>
+        <button class="group-tab" data-group="F">F</button>
+        <button class="group-tab" data-group="G">G</button>
+        <button class="group-tab" data-group="H">H</button>
+        <button class="group-tab" data-group="I">I</button>
+        <button class="group-tab" data-group="J">J</button>
+        <button class="group-tab" data-group="K">K</button>
+        <button class="group-tab" data-group="L">L</button>
+      </div>
+
+      <div class="group-display" id="groupDisplay">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHEDULE -->
+  <section class="schedule-section section" id="schedule">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Match Schedule</p>
+        <h2 class="section-title">Key Fixtures</h2>
+        <p class="section-desc">From the Opening Match to the Grand Final</p>
+      </div>
+
+      <div class="schedule-filter">
+        <button class="filter-btn active" data-round="all">All Rounds</button>
+        <button class="filter-btn" data-round="group">Group Stage</button>
+        <button class="filter-btn" data-round="r32">Round of 32</button>
+        <button class="filter-btn" data-round="r16">Round of 16</button>
+        <button class="filter-btn" data-round="qf">Quarterfinals</button>
+        <button class="filter-btn" data-round="sf">Semifinals</button>
+        <button class="filter-btn" data-round="final">Final</button>
+      </div>
+
+      <div class="schedule-grid" id="scheduleGrid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- VENUES -->
+  <section class="venues-section section" id="venues">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Stadiums</p>
+        <h2 class="section-title">World-Class Venues</h2>
+        <p class="section-desc">16 iconic stadiums across three nations</p>
+      </div>
+
+      <div class="venues-grid" id="venuesGrid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- HOST NATIONS -->
+  <section class="hosts-section section" id="hosts">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Host Nations</p>
+        <h2 class="section-title">Three Countries, One Dream</h2>
+      </div>
+      <div class="hosts-grid">
+        <div class="host-card" style="--accent: #B22234;">
+          <div class="host-flag">&#127482;&#127480;</div>
+          <h3>United States</h3>
+          <p class="host-matches">78 Matches</p>
+          <p>Home to 11 host venues including MetLife Stadium, SoFi Stadium, and AT&amp;T Stadium — hosting the tournament Final at MetLife in East Rutherford, NJ.</p>
+          <ul class="host-cities">
+            <li>New York / New Jersey</li>
+            <li>Los Angeles</li>
+            <li>Dallas</li>
+            <li>San Francisco Bay Area</li>
+            <li>Miami</li>
+            <li>Atlanta</li>
+            <li>Seattle</li>
+            <li>Boston</li>
+            <li>Houston</li>
+            <li>Philadelphia</li>
+            <li>Kansas City</li>
+          </ul>
+        </div>
+        <div class="host-card" style="--accent: #FF0000;">
+          <div class="host-flag">&#127464;&#127462;</div>
+          <h3>Canada</h3>
+          <p class="host-matches">13 Matches</p>
+          <p>Canada's first-ever World Cup as host nation, with matches split between Toronto and Vancouver — two of the most cosmopolitan cities in North America.</p>
+          <ul class="host-cities">
+            <li>Toronto</li>
+            <li>Vancouver</li>
+          </ul>
+        </div>
+        <div class="host-card" style="--accent: #006847;">
+          <div class="host-flag">&#127474;&#127485;</div>
+          <h3>Mexico</h3>
+          <p class="host-matches">13 Matches</p>
+          <p>Mexico becomes the first nation to host World Cup matches three times — joining 1970 and 1986 — with matches in Mexico City, Guadalajara, and Monterrey.</p>
+          <ul class="host-cities">
+            <li>Mexico City</li>
+            <li>Guadalajara</li>
+            <li>Monterrey</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="trophy large">&#9917;</span>
+        <div>
+          <p class="footer-title">FIFA World Cup 2026</p>
+          <p class="footer-sub">USA &bull; Canada &bull; Mexico</p>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#groups">Groups</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#venues">Venues</a>
+        <a href="#hosts">Hosts</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 FIFA World Cup Fan Site. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
