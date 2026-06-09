@@ -79,16 +79,16 @@
             <div class="hiw-step">
               <div class="hiw-num">1</div>
               <div class="hiw-text">
-                <strong>Group Stage</strong>
-                <span>Pick 1st &amp; 2nd from all 12 groups</span>
+                <strong>Round 1 &mdash; Now</strong>
+                <span>Pick 1st &amp; 2nd place from all 12 groups</span>
               </div>
             </div>
             <div class="hiw-arrow">&#8594;</div>
-            <div class="hiw-step">
-              <div class="hiw-num">2</div>
+            <div class="hiw-step hiw-step-locked">
+              <div class="hiw-num hiw-num-locked">&#128274;</div>
               <div class="hiw-text">
-                <strong>Tournament Bracket</strong>
-                <span>Pick match winners through to the Final</span>
+                <strong>Round 2 &mdash; After Group Stage</strong>
+                <span>Fill the knockout bracket once the groups are set</span>
               </div>
             </div>
           </div>
@@ -106,9 +106,9 @@
       <div id="screen-groups" class="pick-screen">
         <div class="picks-header">
           <div class="step-track">
-            <div class="step-node active" id="stepNode1"><span>1</span><label>Group Picks</label></div>
+            <div class="step-node active" id="stepNode1"><span>1</span><label>Round 1</label></div>
             <div class="step-line"></div>
-            <div class="step-node" id="stepNode2"><span>2</span><label>Bracket</label></div>
+            <div class="step-node" id="stepNode2"><span>&#128274;</span><label>Round 2</label></div>
           </div>
           <h2>Pick Group Winners</h2>
           <p>Click teams to assign 1st and 2nd place finishers. Click a selected team to remove them.</p>
@@ -124,7 +124,31 @@
 
         <div class="picks-actions">
           <button id="backToWelcomeBtn" class="btn btn-ghost">&#8592; Change Name</button>
-          <button id="toBracketBtn" class="btn btn-primary" disabled>Build My Bracket &#8594;</button>
+          <button id="toBracketBtn" class="btn btn-primary" disabled>Lock In Round 1 &#8594;</button>
+        </div>
+      </div>
+
+      <!-- ── SCREEN: ROUND 1 COMPLETE ── -->
+      <div id="screen-round1-complete" class="pick-screen">
+
+        <div class="r1c-hero">
+          <div class="r1c-check">&#10003;</div>
+          <h2 class="r1c-title">Round 1 Locked In!</h2>
+          <p id="r1cName" class="r1c-name"></p>
+          <p class="r1c-desc">Your group picks are saved. Come back after the Group Stage to fill in your bracket.</p>
+        </div>
+
+        <div id="r1cGroupsGrid" class="r1c-groups-grid">
+          <!-- compact group summary, rendered by JS -->
+        </div>
+
+        <div id="r2StatusBox" class="r2-status-box">
+          <!-- locked / unlocked state rendered by JS -->
+        </div>
+
+        <div class="picks-actions">
+          <button id="r1cEditBtn" class="btn btn-ghost">&#8592; Edit Group Picks</button>
+          <button id="r1cNewPickerBtn" class="btn btn-outline">New Picker</button>
         </div>
       </div>
 

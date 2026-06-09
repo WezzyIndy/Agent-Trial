@@ -441,6 +441,152 @@ ul { list-style: none; }
 .champion-flag { font-size: 48px; margin-bottom: 12px; }
 
 /* =====================================================
+   WELCOME — locked step styling
+   ===================================================== */
+.hiw-step-locked { opacity: .55; }
+.hiw-num-locked { background: var(--gray) !important; }
+
+/* =====================================================
+   ROUND 1 COMPLETE SCREEN
+   ===================================================== */
+.r1c-hero {
+  text-align: center;
+  padding: 40px 24px 32px;
+  background: linear-gradient(135deg, var(--navy), #1a3a70);
+  border-radius: 20px;
+  margin-bottom: 32px;
+  border: 2px solid rgba(16,185,129,.3);
+}
+
+.r1c-check {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: var(--green);
+  color: var(--white);
+  font-size: 28px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 16px;
+  box-shadow: 0 0 0 8px rgba(16,185,129,.2);
+}
+
+.r1c-title {
+  font-family: var(--font-d);
+  font-size: clamp(32px, 5vw, 52px);
+  color: var(--white);
+  letter-spacing: .04em;
+  margin-bottom: 6px;
+}
+
+.r1c-name {
+  font-size: 18px;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.r1c-desc {
+  font-size: 15px;
+  color: rgba(255,255,255,.65);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Compact group picks grid */
+.r1c-groups-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.r1c-group-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.r1c-group-letter {
+  font-family: var(--font-d);
+  font-size: 18px;
+  color: var(--navy);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.r1c-pick {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  margin-bottom: 3px;
+  color: var(--navy);
+  font-weight: 500;
+  overflow: hidden;
+}
+
+.r1c-pick:last-child { margin-bottom: 0; color: var(--gray); }
+.r1c-pick span:last-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Round 2 status box */
+.r2-status-box { margin-bottom: 8px; }
+
+.r2-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  border-radius: 14px;
+  border: 2px solid;
+  flex-wrap: wrap;
+}
+
+.r2-locked {
+  background: rgba(148,163,184,.06);
+  border-color: var(--border);
+}
+
+.r2-open {
+  background: rgba(16,185,129,.06);
+  border-color: rgba(16,185,129,.4);
+}
+
+.r2-box-icon { font-size: 32px; flex-shrink: 0; }
+
+.r2-box-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 200px;
+}
+
+.r2-box-content strong { font-size: 16px; color: var(--navy); }
+.r2-box-content span  { font-size: 13px; color: var(--gray); line-height: 1.5; }
+.r2-box-content em    { color: var(--navy); font-style: normal; font-weight: 600; }
+
+.r2-countdown {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--gray) !important;
+  background: var(--light);
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  width: fit-content;
+}
+
+@media (max-width: 640px) {
+  .r1c-groups-grid { grid-template-columns: repeat(2, 1fr); }
+  .r2-box { flex-direction: column; align-items: flex-start; }
+}
+
+/* =====================================================
    SUMMARY SCREEN
    ===================================================== */
 .summary-content { max-width: 900px; margin: 0 auto; }

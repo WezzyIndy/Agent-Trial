@@ -3,6 +3,23 @@
    ===================================================== */
 
 // =====================================================
+// ROUND 2 UNLOCK CONFIG
+// Set this date to when the bracket opens (after group stage).
+// Tip: click the ⚽ logo 5 times quickly to unlock early (admin/testing).
+// =====================================================
+const ROUND2_UNLOCK_DATE = new Date('2026-06-28T00:00:00');
+const ROUND2_UNLOCK_STORAGE_KEY = 'wc2026_r2_unlocked';
+
+function isRound2Unlocked() {
+  return localStorage.getItem(ROUND2_UNLOCK_STORAGE_KEY) === 'true'
+    || new Date() >= ROUND2_UNLOCK_DATE;
+}
+
+function adminUnlockRound2() {
+  localStorage.setItem(ROUND2_UNLOCK_STORAGE_KEY, 'true');
+}
+
+// =====================================================
 // DATA
 // =====================================================
 
@@ -346,19 +363,31 @@ document.getElementById('nameInput').addEventListener('keydown', e => {
 
 function startGame() {
   const groupsDone = Object.values(state.groupPicks).every(p => p.first && p.second);
-  if (groupsDone && hasBracketPicks()) {
-    showScreen('screen-bracket');
-    renderBracketRound(state.currentBracketRound);
-    document.getElementById('bracketRoundTabs').querySelectorAll('.bracket-tab').forEach(t => {
-      t.classList.toggle('active', t.dataset.round === state.currentBracketRound);
-    });
-  } else if (groupsDone) {
-    showScreen('screen-bracket');
-    renderBracketRound('r32');
-  } else {
+
+  if (!groupsDone) {
     showScreen('screen-groups');
     renderGroupsPickGrid();
     updateGroupProgress();
+    return;
+  }
+
+  // Round 1 is complete
+  if (isRound2Unlocked()) {
+    // Round 2 is open — go straight to bracket (or summary if bracket done)
+    if (hasBracketPicks()) {
+      showScreen('screen-bracket');
+      renderBracketRound(state.currentBracketRound);
+      document.querySelectorAll('.bracket-tab').forEach(t =>
+        t.classList.toggle('active', t.dataset.round === state.currentBracketRound)
+      );
+    } else {
+      showScreen('screen-bracket');
+      renderBracketRound('r32');
+    }
+  } else {
+    // Round 2 is locked — show confirmation/waiting screen
+    showScreen('screen-round1-complete');
+    renderRound1Complete();
   }
 }
 
@@ -451,10 +480,83 @@ function updateGroupProgress() {
 }
 
 document.getElementById('toBracketBtn').addEventListener('click', () => {
-  showScreen('screen-bracket');
-  renderBracketRound('r32');
-  updateBracketTabStates();
-  document.querySelector('.bracket-tab[data-round="r32"]').classList.add('active');
+  saveState();
+  if (isRound2Unlocked()) {
+    showScreen('screen-bracket');
+    renderBracketRound('r32');
+    updateBracketTabStates();
+    document.querySelector('.bracket-tab[data-round="r32"]').classList.add('active');
+  } else {
+    showScreen('screen-round1-complete');
+    renderRound1Complete();
+  }
+});
+
+// =====================================================
+// ROUND 1 COMPLETE SCREEN
+// =====================================================
+
+function renderRound1Complete() {
+  document.getElementById('r1cName').textContent = state.name + "'s picks";
+
+  // Compact group summary
+  const grid = document.getElementById('r1cGroupsGrid');
+  grid.innerHTML = Object.keys(GROUPS).map(letter => {
+    const p = state.groupPicks[letter];
+    return `
+      <div class="r1c-group-card">
+        <span class="r1c-group-letter">Group ${letter}</span>
+        <div class="r1c-pick"><span>🥇</span><span>${p?.first?.flag || '—'}</span><span>${p?.first?.name || 'Not picked'}</span></div>
+        <div class="r1c-pick"><span>🥈</span><span>${p?.second?.flag || '—'}</span><span>${p?.second?.name || 'Not picked'}</span></div>
+      </div>
+    `;
+  }).join('');
+
+  // Round 2 status box
+  const box = document.getElementById('r2StatusBox');
+  if (isRound2Unlocked()) {
+    box.innerHTML = `
+      <div class="r2-box r2-open">
+        <div class="r2-box-icon">🏆</div>
+        <div class="r2-box-content">
+          <strong>Round 2 is now open!</strong>
+          <span>The knockout bracket is ready — fill in your picks.</span>
+        </div>
+        <button id="r1cToBracketBtn" class="btn btn-primary">Open Bracket &#8594;</button>
+      </div>
+    `;
+    document.getElementById('r1cToBracketBtn').addEventListener('click', () => {
+      showScreen('screen-bracket');
+      renderBracketRound(state.currentBracketRound || 'r32');
+      updateBracketTabStates();
+    });
+  } else {
+    const diff = ROUND2_UNLOCK_DATE - new Date();
+    const days = Math.ceil(diff / 86400000);
+    box.innerHTML = `
+      <div class="r2-box r2-locked">
+        <div class="r2-box-icon">🔒</div>
+        <div class="r2-box-content">
+          <strong>Round 2 opens after the Group Stage</strong>
+          <span>Come back on or after <em>${ROUND2_UNLOCK_DATE.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</em> to fill in your bracket.</span>
+          <span class="r2-countdown">${days > 0 ? `~${days} day${days !== 1 ? 's' : ''} to go` : 'Opening soon!'}</span>
+        </div>
+      </div>
+    `;
+  }
+}
+
+document.getElementById('r1cEditBtn').addEventListener('click', () => {
+  showScreen('screen-groups');
+  renderGroupsPickGrid();
+  updateGroupProgress();
+});
+
+document.getElementById('r1cNewPickerBtn').addEventListener('click', () => {
+  state = { name: '', groupPicks: {}, bracketPicks: {}, currentBracketRound: 'r32' };
+  document.getElementById('nameInput').value = '';
+  renderWelcome();
+  showScreen('screen-welcome');
 });
 
 // =====================================================
@@ -713,6 +815,24 @@ window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY
 
 document.getElementById('hamburger').addEventListener('click', () => nav.classList.toggle('open'));
 document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+
+// Admin unlock: click the nav logo 5 times within 3 seconds
+let adminClicks = 0, adminTimer;
+document.querySelector('.nav-logo').addEventListener('click', e => {
+  e.preventDefault();
+  adminClicks++;
+  clearTimeout(adminTimer);
+  adminTimer = setTimeout(() => { adminClicks = 0; }, 3000);
+  if (adminClicks >= 5) {
+    adminClicks = 0;
+    adminUnlockRound2();
+    showToast('🔓 Round 2 unlocked!');
+    // Re-render current screen if on round1-complete
+    if (document.getElementById('screen-round1-complete').classList.contains('active')) {
+      renderRound1Complete();
+    }
+  }
+});
 
 // =====================================================
 // TOAST
