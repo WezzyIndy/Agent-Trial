@@ -12,6 +12,7 @@ from langgraph.graph import StateGraph
 from langgraph.prebuilt import ToolNode
 
 from react_agent.configuration import Configuration
+from react_agent.pricing import BUNDLE_DISCOUNT
 from react_agent.state import InputState, State
 from react_agent.tools import TOOLS
 from react_agent.utils import load_chat_model
@@ -40,7 +41,8 @@ async def call_model(
 
     # Format the system prompt. Customize this to change the agent's behavior.
     system_message = configuration.system_prompt.format(
-        system_time=datetime.now(tz=timezone.utc).isoformat()
+        system_time=datetime.now(tz=timezone.utc).isoformat(),
+        bundle_pct=int(BUNDLE_DISCOUNT * 100),
     )
 
     # Get the model's response
@@ -120,4 +122,4 @@ graph = builder.compile(
     interrupt_before=[],  # Add node names here to update state before they're called
     interrupt_after=[],  # Add node names here to update state after they're called
 )
-graph.name = "ReAct Agent"  # This customizes the name in LangSmith
+graph.name = "Pressure Washing Estimate Agent"  # This customizes the name in LangSmith
