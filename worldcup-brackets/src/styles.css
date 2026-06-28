@@ -1,0 +1,127 @@
+:root {
+  --bg: #0f1424;
+  --card: #1a2138;
+  --card2: #222b47;
+  --line: #2e395b;
+  --text: #eef1f8;
+  --muted: #9aa6c4;
+  --accent: #19c37d;
+  --accent2: #3b82f6;
+  --danger: #ef4444;
+  --gold: #f5c451;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #0c1020, #0f1424);
+  color: var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 16px 16px 64px; }
+
+.app-header { text-align: center; margin: 8px 0 18px; }
+.app-header h1 { font-size: 1.5rem; margin: 0 0 4px; }
+.subtitle { color: var(--muted); font-size: 0.95rem; }
+.countdown { color: var(--gold); font-weight: 600; }
+
+.app-footer { text-align: center; margin-top: 32px; }
+.muted { color: var(--muted); }
+.small { font-size: 0.82rem; }
+.error { color: var(--danger); font-weight: 600; }
+.ok-banner { background: rgba(25,195,125,.15); color: var(--accent); padding: 8px 12px; border-radius: 8px; }
+
+a { color: var(--accent2); }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 16px;
+}
+.card h2 { margin: 0 0 8px; font-size: 1.15rem; }
+
+input {
+  width: 100%;
+  padding: 11px 12px;
+  margin: 8px 0;
+  background: var(--card2);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+button {
+  cursor: pointer;
+  border: 1px solid var(--line);
+  background: var(--card2);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 9px;
+  font-size: 0.95rem;
+}
+button:hover { border-color: var(--accent2); }
+button.primary { background: var(--accent); border-color: var(--accent); color: #06281a; font-weight: 700; width: 100%; }
+button.danger { border-color: var(--danger); color: #fff; }
+button:disabled { opacity: .55; cursor: default; }
+
+.btn-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 8px 0; }
+.check { display: inline-flex; align-items: center; gap: 6px; }
+.check input { width: auto; margin: 0; }
+.field { display: block; font-size: .85rem; color: var(--muted); }
+
+.toolbar {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 10px; margin-bottom: 10px; flex-wrap: wrap;
+}
+.save { font-size: .85rem; color: var(--muted); min-height: 1em; }
+.save.saved { color: var(--accent); }
+.save.error { color: var(--danger); }
+
+/* Bracket */
+.bracket { display: flex; flex-direction: column; gap: 18px; }
+.round-title { display: flex; align-items: baseline; gap: 8px; font-size: 1rem; margin: 4px 0; }
+.round-title .pts { font-size: .75rem; color: var(--muted); font-weight: 500; }
+.matches { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+@media (max-width: 520px) { .matches { grid-template-columns: 1fr; } }
+
+.match {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.team {
+  width: 100%; text-align: left; border: none; border-radius: 0;
+  border-bottom: 1px solid var(--line); background: transparent;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 12px;
+}
+.team:last-child { border-bottom: none; }
+.team.chosen { background: rgba(59,130,246,.22); font-weight: 700; }
+.team.chosen.correct { background: rgba(25,195,125,.28); }
+.team.chosen.wrong { background: rgba(239,68,68,.25); }
+.team .badge { font-size: .72rem; color: var(--accent); }
+.team-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Tabs + leaderboard */
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+.tabs button { padding: 7px 11px; font-size: .85rem; }
+.tabs button.active { background: var(--accent2); border-color: var(--accent2); }
+
+.leaderboard { width: 100%; border-collapse: collapse; }
+.leaderboard th, .leaderboard td { padding: 9px 8px; text-align: left; border-bottom: 1px solid var(--line); }
+.leaderboard th { color: var(--muted); font-size: .8rem; text-transform: uppercase; }
+.leaderboard tr:first-child td strong { color: var(--gold); }
+
+/* Admin teams editor */
+.teams-grid { display: grid; gap: 6px; margin-bottom: 12px; }
+.team-edit { display: grid; grid-template-columns: 32px 1fr 24px 1fr; align-items: center; gap: 6px; }
+.team-edit .mnum { color: var(--muted); font-size: .8rem; }
+.team-edit .vs { text-align: center; color: var(--muted); font-size: .8rem; }
+.team-edit input { margin: 2px 0; }
