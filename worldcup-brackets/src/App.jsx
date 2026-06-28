@@ -48,9 +48,9 @@ function Pool() {
   const [saveStatus, setSaveStatus] = useState('') // '', 'saving', 'saved', 'error'
   const saveTimer = useRef(null)
 
-  const load = useCallback(async () => {
+  const load = useCallback(async (tk = token) => {
     try {
-      const s = await api.getState(token)
+      const s = await api.getState(tk)
       setState(s)
       if (s.you) setPicks(s.you.picks || {})
       setError('')
@@ -99,7 +99,10 @@ function Pool() {
       const r = await api.join(name)
       localStorage.setItem(TOKEN_KEY, r.token)
       setToken(r.token)
-      await load()
+      // Pass the new token explicitly — the `load` closure still holds the old
+      // (empty) token until the next render, which would otherwise bounce us
+      // back to the join screen.
+      await load(r.token)
     } catch (e) {
       setError(e.message)
     }
